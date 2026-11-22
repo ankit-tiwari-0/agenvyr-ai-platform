@@ -98,3 +98,16 @@ Thumbs.db
 *.temp
 *.swp
 *.swo
+
+# Firebase Admin SDK credentials
+serviceAccountKey.json
+*serviceAccountKey*.json
+
+# Firebase private keys
+firebase-adminsdk*.json
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
