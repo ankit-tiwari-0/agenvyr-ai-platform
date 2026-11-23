@@ -1,12 +1,12 @@
 import{ getAuth } from "firebase-admin/auth";
-import { App } from "../config/firebase";
+import { App } from "../config/firebase.js";
 import User from "../models/user.model.js";
 
 export const login = async (req, res) => {
     try {
         const {token} = req.body;
        const decodedToken = await getAuth(App).verifyIdToken(token);
-       const user=await User.findOne({firebaseId:decodedToken.uid});
+       let user=await User.findOne({firebaseId:decodedToken.uid});
        if(!user){
          user=await User.create({
             firebaseId:decodedToken.uid,
