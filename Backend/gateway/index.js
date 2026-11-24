@@ -19,7 +19,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",proxy(process.env.AUTH_SERVICE_URL));
-app.use("/me",protectedRoutes, getcurrentUser);
+app.get("/me",protectedRoutes, getcurrentUser);
 
 app.get('/', (req, res) => {
   res.send('Hello from the gateway!');
