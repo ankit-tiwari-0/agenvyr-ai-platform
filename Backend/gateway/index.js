@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import proxy from 'express-http-proxy';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import protectedRoutes from './middleware/auth.middleware.js';
+import { getcurrentUser } from './controller/user.controller.js';
 
 dotenv.config();
 
@@ -17,6 +19,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",proxy(process.env.AUTH_SERVICE_URL));
+app.use("/me",protectedRoutes, getcurrentUser);
 
 app.get('/', (req, res) => {
   res.send('Hello from the gateway!');
