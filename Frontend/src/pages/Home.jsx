@@ -5,16 +5,18 @@ import { FcGoogle } from "react-icons/fc";
 
 import { auth, googleProvider } from "../../utils/firebase";
 import api from "../../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsedata } from './../redux/userSlice';
 
 const Home = () => {
 
+  const {userData}= useSelector((state) => state.user);
+  const dispatch = useDispatch(); 
   // Backend authentication
   const handleLogin = async (token) => {
     try {
       const { data } = await api.post("/auth/login", { token });
-
-      console.log("Backend login successful:", data);
-
+      dispatch(setUsedata(data));
       return data;
     } catch (error) {
       console.error(
@@ -60,6 +62,7 @@ const Home = () => {
 
 
       {/* LEFT SECTION - DESKTOP */}
+      {!userData && (
       <section className="relative hidden min-h-dvh flex-col justify-between overflow-hidden border-r border-white/6 bg-[#0d0e14]/80 p-10 lg:flex xl:p-16">
 
         <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-violet-600/10 blur-[120px]" />
@@ -119,9 +122,11 @@ const Home = () => {
         </p>
 
       </section>
+      )}
 
 
       {/* RIGHT SECTION - LOGIN */}
+      {!userData && (
       <section className="relative flex min-h-dvh items-center justify-center px-5 py-10 sm:px-8 lg:px-10">
 
         <div className="w-full max-w-95">
@@ -221,6 +226,7 @@ const Home = () => {
         </div>
 
       </section>
+      )}
 
     </main>
   );
