@@ -10,7 +10,7 @@ dotenv.config();
 
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000 ;
 
 app.use(cors({
   origin: process.env.FRONTEND_URL,
@@ -19,6 +19,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",proxy(process.env.AUTH_SERVICE_URL));
+app.use("/chat",proxy(process.env.CHAT_SERVICE_URL));
 app.get("/me",protectedRoutes, getcurrentUser);
 
 app.get('/', (req, res) => {
