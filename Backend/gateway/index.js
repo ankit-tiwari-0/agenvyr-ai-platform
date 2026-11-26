@@ -20,7 +20,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",proxy(process.env.AUTH_SERVICE_URL));
-app.use("/chat",proxyWithHeader(process.env.CHAT_SERVICE_URL));
+app.use("/chat",protectedRoutes, proxyWithHeader(process.env.CHAT_SERVICE_URL));
 app.get("/me",protectedRoutes, getcurrentUser);
 
 app.get('/', (req, res) => {
