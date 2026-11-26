@@ -49,3 +49,16 @@ export const saveMessage = async (req, res) => {
      }
 }   
 
+export const getMessage = async (req, res) => {
+     try {
+          const { conversationId } = req.body;
+            const message = await Message.create({
+                conversationId
+            });     
+            return res.status(201).json({ message: "Message saved successfully", message });
+     } catch (error) {
+          console.error("Error saving message:", error);
+          res.status(500).json({ message: "Error saving message" });
+     }
+}   
+
