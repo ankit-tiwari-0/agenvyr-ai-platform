@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import protectedRoutes from './middleware/auth.middleware.js';
 import { getcurrentUser } from './controller/user.controller.js';
+import { proxyWithHeader } from './utils/proxyWithheader.js';
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use("/auth",proxy(process.env.AUTH_SERVICE_URL));
-app.use("/chat",proxy(process.env.CHAT_SERVICE_URL));
+app.use("/chat",proxyWithHeader(process.env.CHAT_SERVICE_URL));
 app.get("/me",protectedRoutes, getcurrentUser);
 
 app.get('/', (req, res) => {
