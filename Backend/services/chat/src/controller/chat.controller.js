@@ -38,6 +38,21 @@ export const getCreateConversations = async (req, res) => {
     }
 }
 
+export const updateCreateConversations = async (req, res) => {
+    try {
+        const {id,title} = req.body;
+        const conversation = await Conversation.findByIdAndUpdate(
+            id,
+            { title }
+        );
+
+        return res.status(200).json({ message: "Conversation GET successfully", updateConversations: conversation });
+
+    } catch (error) {
+        console.error("Error fetching conversation:", error);
+        res.status(500).json({ message: "Error fetching conversation" });
+    }
+}
 
 export const saveMessage = async (req, res) => {
     try {
