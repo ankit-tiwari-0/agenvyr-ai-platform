@@ -22,7 +22,7 @@ export const createConversation = async (req, res) => {
     }
 }
 
-export const getCreateConversations = async (req, res) => {
+export const getConversations = async (req, res) => {
     try {
         const userId = req.headers["x-user-id"];
         console.log("userID", userId);
@@ -71,7 +71,7 @@ export const saveMessage = async (req, res) => {
 
 export const getMessage = async (req, res) => {
     try {
-        const { conversationId } = req.body;
+       const { conversationId } = req.params;
         const message = await Message.find({
             conversationId
         }).sort({ createdAt: 1 });
