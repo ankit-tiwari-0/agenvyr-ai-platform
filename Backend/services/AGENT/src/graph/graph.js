@@ -54,3 +54,8 @@ workflow.addEdge("codingAgent", "__end__")
 workflow.addEdge("pdfAgent", "__end__")
 workflow.addEdge("pptAgent", "__end__")
 workflow.addEdge("visionAgent", "__end__")
+
+
+const graph = workflow.compile();
+
+export default graph;
